@@ -104,13 +104,13 @@ const MatchPrediction = () => {
 
 
   const predictMatch = () => {
-    // Validate teams and venue
+
     if (!teamA || !teamB || !venue) {
       alert('Please select both teams and a venue.');
       return;
     }
     console.log('Request data:', { teamA, teamB, venue });
-    // Send the prediction request
+
     fetch('http://localhost:5000/api/predict', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
