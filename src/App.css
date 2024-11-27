@@ -1,0 +1,190 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('stadium_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Header Styles */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Teams Layout */
+.teams {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+/* Team Card */
+.team-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.team-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: contain;
+    border: 3px solid #ffd700;
+    align-self: center;
+}
+
+.team-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.team-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.team-card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #d2d0d0;
+}
+
+/* Dropdown Styles */
+.team-card select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #000;
+    margin-top: 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* VS Section */
+.vs {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0 20px;
+}
+
+/* Stadium Selection */
+.stadium-selection {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.stadium-selection select {
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #000;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Team Image Specific */
+.team-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .teams {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-card {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .vs {
+        margin: 20px 0;
+    }
+}
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Makes sure the container takes the full screen height */
+    text-align: center;
+    color: white; /* Set the default text color to white */
+}
+
+.teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.team-card, .vs {
+    margin: 0 20px;
+}
+
+.stadium-selection {
+    margin-bottom: 20px;
+}
+
+select {
+    margin-top: 10px;
+    color: black; 
+}
+.predict-btn {
+    background-color: #0356fc;
+    color: white;
+    border: none;
+    border-radius: 50px; /* Makes the button oval */
+    padding: 10px 30px;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.predict-btn:hover {
+    background-color: #0243d4; /* Darken on hover */
+    color: white;
+}
