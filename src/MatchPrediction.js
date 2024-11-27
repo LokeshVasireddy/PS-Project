@@ -114,19 +114,21 @@ const MatchPrediction = () => {
     fetch('http://localhost:5000/api/predict', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        teamA: teamA,
-        teamB: teamB,
-        venue: venue,
-      }),
-    }).then((response) => response.json()).then((result) => {
-        if (result.error) {
-          alert(result.error);
-        } else {
-          setPredictionResult(result);
-        }
-      })
-      .catch((error) => alert('Error: ' + error.message));
+      body: JSON.stringify({ teamA, teamB, venue }),
+    })    
+    .then((response) => {
+      console.log('Response:', response);
+      return response.json(); 
+    })
+    .then((result) => {
+      console.log('Prediction Result:', result);
+      if (result.error) {
+        alert(result.error);
+      } else {
+        setPredictionResult(result);
+      }
+    })
+    .catch((error) => alert('Error: ' + error.message));
   };
 
   return (

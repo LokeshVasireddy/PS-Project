@@ -16,7 +16,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5000"])
+CORS(app, origins=["http://localhost:3000"])
 
 data = pd.read_csv("data1.csv")
 
@@ -76,8 +76,8 @@ def predict_match():
 
     result = {}
 
-    for key1, value in team.items():
-        if teamA == value:
+    for key1, value1 in team.items():
+        if teamA == key1:
             teamA_score = round(pred1[0, 0])
             teamA_wickets = round(pred1[0, 1])
             teamA_run_rate = teamA_score / 20
@@ -89,7 +89,7 @@ def predict_match():
             break
 
     for key2, value2 in team.items():
-        if teamB == value2:
+        if teamB == key2:
             teamB_score = round(pred2[0, 0])
             teamB_wickets = round(pred2[0, 1])
             teamB_run_rate = teamB_score / 20
@@ -98,7 +98,7 @@ def predict_match():
                     'score': teamB_score,
                     'wickets': teamB_wickets,
                     'run_rate': round(teamB_run_rate, 2),
-                    'match_result': f"{key1} won by {teamA_score - teamB_score} runs"
+                    'match_result': f"{value1} won by {teamA_score - teamB_score} runs"
                 }
             else:
                 teamB_scored = math.ceil(round(teamA_score / teamB_run_rate, 1) * teamB_run_rate)
@@ -111,11 +111,11 @@ def predict_match():
                     'score': teamB_scored,
                     'wickets': teamB_wickets,
                     'run_rate': round(teamB_run_rate, 2),
-                    'match_result': f"{key2} chased down the score in {oversface}.{remaining_balls} overs"
+                    'match_result': f"{value2} chased down the score in {oversface}.{remaining_balls} overs"
                 }
             break
 
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3000)
