@@ -6,14 +6,14 @@ import math
 import warnings
 warnings.simplefilter("ignore", UserWarning)
 
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-
 import numpy as np
 import pandas as pd
 
 from tensorflow import keras
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5000"])
