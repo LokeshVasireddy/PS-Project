@@ -14,7 +14,7 @@ warnings.simplefilter("ignore", UserWarning)
 # Initialize Flask app
 app = Flask(__name__)
 # Load and preprocess data
-CORS(app, origins=["http://localhost:3000"])
+CORS(app, origins=["http://localhost:5000"])
 data = pd.read_csv("data.csv")
 features = ['date', 'batting_team', 'bowling_team', 'venue', 'over', 'ball', 'total_runs', 'is_wicket', 'runs', 'wickets']
 data = data[features]
@@ -43,6 +43,8 @@ model = keras.models.load_model("lstm1.keras")
 # Team and stadium mappings
 team = {1: 'Chennai Super Kings', 2: 'Delhi Capitals', 3: 'Gujarat Titans', 5: 'Kolkata Knight Riders', 6: 'Lucknow Super Giants', 7: 'Mumbai Indians', 9: 'Punjab Kings', 10: 'Rajasthan Royals', 12: 'Royal Challengers Bengaluru', 13: 'Sunrisers Hyderabad'}
 venue = {1: 'Arun Jaitley Stadium', 3: 'Barsapara Cricket Stadium', 7: 'Dr DY Patil Sports Academy', 10: 'Eden Gardens', 11: 'Ekana Cricket Stadium', 12: 'Feroz Shah Kotla', 18: 'M Chinnaswamy Stadium', 19: 'MA Chidambaram Stadium', 20: 'Maharaja Yadavindra Singh International Cricket Stadium', 22: 'Narendra Modi Stadium', 27: 'Punjab Cricket Association IS Bindra Stadium', 28: 'Punjab Cricket Association Stadium', 29: 'Rajiv Gandhi International Stadium', 30: 'Sardar Patel Stadium', 31: 'Saurashtra Cricket Association Stadium', 32: 'Sawai Mansingh Stadium', 35: 'Sheikh Zayed Stadium', 37: 'Subrata Roy Sahara Stadium', 39: 'Vidarbha Cricket Association Stadium', 40: 'Wankhede Stadium'}
+steam = {str(key): value for key, value in team.items()}
+svenue = {str(key): value for key, value in venue.items()}
 @app.route('/api/predict', methods=['POST'])
 def predict_match():
     data = request.json
@@ -50,8 +52,12 @@ def predict_match():
     teamB = data.get('teamB')
     venue1 = data.get('venue')
 
-    if teamA not in team.values() or teamB not in team.values() or venue1 not in venue.values():
+    if teamA not in steam.keys() or teamB not in steam.keys() or venue1 not in svenue.keys():
         return jsonify({'error': 'Invalid team or venue code.'}), 400
+
+    teamA = int(teamA)
+    teamB = int(teamB)
+    venue1 = int(venue1)
 
     Input1 = [[teamA, teamB, venue1]]
     Input2 = [[teamB, teamA, venue1]]
