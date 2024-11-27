@@ -1,50 +1,44 @@
 import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 import math
+
 import warnings
+warnings.simplefilter("ignore", UserWarning)
+
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 import numpy as np
 import pandas as pd
+
 from tensorflow import keras
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from flask_cors import CORS
-# Suppress TensorFlow and UserWarnings
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
-warnings.simplefilter("ignore", UserWarning)
-# Initialize Flask app
+
 app = Flask(__name__)
-# Load and preprocess data
 CORS(app, origins=["http://localhost:5000"])
-data = pd.read_csv("data.csv")
-features = ['date', 'batting_team', 'bowling_team', 'venue', 'over', 'ball', 'total_runs', 'is_wicket', 'runs', 'wickets']
-data = data[features]
-data['date'] = pd.to_datetime(data['date'], dayfirst=True)
-data.set_index('date', inplace=True)
+
+data = pd.read_csv("data1.csv")
+
 input_features = ['batting_team', 'bowling_team', 'venue']
 encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 encoded_categorical = encoder.fit_transform(data[input_features])
+
 xfeats = ['over', 'ball']
 scalerx = StandardScaler()
 scaled_x = scalerx.fit_transform(data[xfeats])
+
 yfeats = ['runs', 'wickets']
 scalery = StandardScaler()
 scaled_y = scalery.fit_transform(data[yfeats])
 
-X = np.hstack((encoded_categorical, scaled_x))
-X = X.reshape(X.shape[0], 1, X.shape[1])
-y = np.vstack((scaled_y))
-
-# Split data into training and validation sets
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Load the pre-trained model
 model = keras.models.load_model("lstm1.keras")
 
-# Team and stadium mappings
 team = {1: 'Chennai Super Kings', 2: 'Delhi Capitals', 3: 'Gujarat Titans', 5: 'Kolkata Knight Riders', 6: 'Lucknow Super Giants', 7: 'Mumbai Indians', 9: 'Punjab Kings', 10: 'Rajasthan Royals', 12: 'Royal Challengers Bengaluru', 13: 'Sunrisers Hyderabad'}
 venue = {1: 'Arun Jaitley Stadium', 3: 'Barsapara Cricket Stadium', 7: 'Dr DY Patil Sports Academy', 10: 'Eden Gardens', 11: 'Ekana Cricket Stadium', 12: 'Feroz Shah Kotla', 18: 'M Chinnaswamy Stadium', 19: 'MA Chidambaram Stadium', 20: 'Maharaja Yadavindra Singh International Cricket Stadium', 22: 'Narendra Modi Stadium', 27: 'Punjab Cricket Association IS Bindra Stadium', 28: 'Punjab Cricket Association Stadium', 29: 'Rajiv Gandhi International Stadium', 30: 'Sardar Patel Stadium', 31: 'Saurashtra Cricket Association Stadium', 32: 'Sawai Mansingh Stadium', 35: 'Sheikh Zayed Stadium', 37: 'Subrata Roy Sahara Stadium', 39: 'Vidarbha Cricket Association Stadium', 40: 'Wankhede Stadium'}
 steam = {str(key): value for key, value in team.items()}
 svenue = {str(key): value for key, value in venue.items()}
+
 @app.route('/api/predict', methods=['POST'])
 def predict_match():
     data = request.json
