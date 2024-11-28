@@ -82,47 +82,53 @@ const MatchPrediction = () => {
   const [predictionResult, setPredictionResult] = useState(null);
 
   const handleTeamChange = (team, value) => {
-    if (team === 'A') setTeamA(value);
-    else setTeamB(value);
+  if (team === 'A') setTeamA(value);
+  else setTeamB(value);
 
-    if (value === (team === 'A' ? teamB : teamA)) {
-      setMessage('Team A and Team B cannot be the same!');
+  if (value === (team === 'A' ? teamB : teamA)) {
+    setMessage('Team A and Team B cannot be the same!');
+    setHeadToHead('N/A');
+  } else {
+    setMessage('');
+    const headToHeadResult =
+      teamStats[value]?.headToHead[team === 'A' ? teamB : teamA] || 
+      'No head-to-head data available';
+      
+    if (teamB === '' || teamA === '') {
       setHeadToHead('N/A');
     } else {
-      setMessage('');
-      const headToHeadResult =
-        teamStats[value]?.headToHead[team === 'A' ? teamB : teamA] ||
-        'No head-to-head data available';
       setHeadToHead(headToHeadResult);
     }
-  };
+  }
+};
+
 
   const predictMatch = () => {
-    // Validate teams and venue
+
     if (!teamA || !teamB || !venue) {
       alert('Please select both teams and a venue.');
       return;
     }
     console.log('Request data:', { teamA, teamB, venue });
-    // Send the prediction request
+
     fetch('http://localhost:5000/api/predict', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        teamA: teamA,
-        teamB: teamB,
-        venue: venue,
-      }),
+      body: JSON.stringify({ teamA, teamB, venue }),
+    })    
+    .then((response) => {
+      console.log('Response:', response);
+      return response.json(); 
     })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.error) {
-          alert(result.error);
-        } else {
-          setPredictionResult(result);
-        }
-      })
-      .catch((error) => alert('Error: ' + error.message));
+    .then((result) => {
+      console.log('Prediction Result:', result);
+      if (result.error) {
+        alert(result.error);
+      } else {
+        setPredictionResult(result);
+      }
+    })
+    .catch((error) => alert('Error: ' + error.message));
   };
 
   return (

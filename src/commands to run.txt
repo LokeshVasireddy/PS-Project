@@ -1,0 +1,7 @@
+// To Run Flask
+
+$env:FLASK_APP = "model.py"
+flask run
+
+// To Run Node
+npm start
