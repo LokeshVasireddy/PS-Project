@@ -7,70 +7,70 @@ const teamStats = {
       homeWins: 50,
       awayWins: 88,
       totalWins: 138,
-      highestScore: 246,
+      highestScore: 246
   },
   '2': {
       headToHead: { '1': '11-19', '3': '1-2', '5': '15-16', '6': '0-3', '7': '16-19', '9': '16-17', '10': '14-15', '12': '11-18', '13': '11-12' },
       homeWins: 35,
       awayWins: 77,
       totalWins: 112,
-      highestScore: 257,
+      highestScore: 257
   },
   '3': {
       headToHead: { '1': '4-3', '2': '2-1', '5': '2-1', '6': '4-1', '7': '3-2', '9': '2-4', '10': '5-1', '12': '2-3', '13': '3-1' },
       homeWins: 9,
       awayWins: 19,
       totalWins: 28,
-      highestScore: 233,
+      highestScore: 233
   },
   '5': {
       headToHead: { '1': '19-10', '2': '16-15', '3': '1-2', '6': '0-3', '7': '11-23', '9': '21-11', '10': '14-12', '12': '20-14', '13': '18-9' },
       homeWins: 52,
       awayWins: 78,
       totalWins: 130,
-      highestScore: 272,
+      highestScore: 272
   },
   '6': {
       headToHead: { '1': '3-1', '2': '3-0', '3': '1-4', '5': '3-0', '7': '5-1', '9': '3-1', '10': '1-4', '12': '2-3', '13': '3-1' },
       homeWins: 7,
       awayWins: 17,
       totalWins: 24,
-      highestScore: 257,
+      highestScore: 257
   },
   '7': {
       headToHead: { '1': '20-17', '2': '19-16', '3': '2-3', '5': '23-11', '6': '1-5', '9': '17-14', '10': '15-14', '12': '19-14', '13': '12-10' },
       homeWins: 51,
       awayWins: 91,
       totalWins: 142,
-      highestScore: 247,
+      highestScore: 247
   },
   '9': {
       headToHead: { '1': '13-16', '2': '17-16', '3': '4-2', '5': '11-21', '6': '1-3', '7': '14-17', '10': '11-16', '12': '17-16', '13': '7-16' },
       homeWins: 31,
       awayWins: 78,
       totalWins: 109,
-      highestScore: 262,
+      highestScore: 262
   },
   '10': {
       headToHead:  { '1': '13-16', '2': '15-14', '3': '1-5', '5': '12-14', '6': '4-1', '7': '14-15', '9': '16-11', '12': '14-15', '13': '9-11' },
       homeWins: 37,
       awayWins: 73,
       totalWins: 110,
-      highestScore: 226,
+      highestScore: 226
   },
   '12': {
       headToHead: { '1': '11-21', '2': '18-11', '3': '3-2', '5': '14-20', '6': '3-2', '7': '14-19', '9': '16-17', '10': '15-14', '13': '11-12' },
       homeWins: 43,
       awayWins: 78,
       totalWins: 121,
-      highestScore: 263,
+      highestScore: 263
   },
   '13': {
       headToHead: { '1': '6-15', '2': '12-11', '3': '1-3', '5': '9-18', '6': '1-3', '7': '10-12', '9': '16-7', '10': '9-11', '12': '12-11' },
       homeWins: 35,
       awayWins: 52,
       totalWins: 87,
-      highestScore: 287,
+      highestScore: 287
   },
 };
 const MatchPrediction = () => {
